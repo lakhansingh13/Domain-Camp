@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void area(int r){
+    cout<<"The area of circle is: "<<3.14*r*r<<endl;
+}
+
+void area(int l , int b){
+    cout<<"The area of rectangle is: "<< l*b<<endl;
+
+}
+
+void area(int b , float h){
+    cout<<"The area of triangle is: "<<0.5*b*h<<endl;
+}
+ int main(){
+    int r, l, b;
+    float h;
+    cout<<"Enter the value of r,l,b,h: ";
+    cin>>r>>l>>b>>h;
+    area(r);
+    area(l , b);
+    area(b ,h);
+ }
