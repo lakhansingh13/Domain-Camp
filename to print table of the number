@@ -1,0 +1,14 @@
+#include<bits/stdc++.h>
+using namespace std;
+ int main(){
+     int n , l;
+     cout<<"Enter the number which table you want to print: ";
+     cin>>n;
+     cout<<"Enter limit to which table must be print: ";
+     cin>>l;
+     
+     for(int i=1; i<=l; i++){
+         cout<<n<<"*"<<l<<" = ";
+         cout<<n*i<<endl;
+     }
+ }
