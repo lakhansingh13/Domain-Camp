@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account {
+protected:
+    string accountHolderName;
+    double balance;
+
+public:
+    Account(string name, double initialBalance) : accountHolderName(name), balance(initialBalance) {}
+
+    virtual void calculateInterest() = 0;
+
+    virtual void displayDetails() {
+        cout << "Account Holder: " << accountHolderName << endl;
+        cout << "Balance: $" << balance << endl;
+    }
+
+    virtual ~Account() {}
+};
+
+class SavingsAccount : public Account {
+private:
+    double interestRate;
+    double time;
+
+public:
+    SavingsAccount(string name, double initialBalance, double rate, double timePeriod)
+        : Account(name, initialBalance), interestRate(rate), time(timePeriod) {}
+
+    void calculateInterest() override {
+        double interest = balance * interestRate * time;
+        balance += interest;
+        cout << "Interest added: $" << interest << endl;
+    }
+
+    void displayDetails() override {
+        Account::displayDetails();
+        cout << "Account Type: Savings Account" << endl;
+    }
+};
+
+class CurrentAccount : public Account {
+private:
+    double maintenanceFee;
+
+public:
+    CurrentAccount(string name, double initialBalance, double fee)
+        : Account(name, initialBalance), maintenanceFee(fee) {}
+
+    void calculateInterest() override {
+        balance -= maintenanceFee;
+        cout << "Maintenance fee deducted: $" << maintenanceFee << endl;
+    }
+
+    void displayDetails() override {
+        Account::displayDetails();
+        cout << "Account Type: Current Account" << endl;
+    }
+};
+
+int main() {
+    SavingsAccount savings("John Doe", 5000.0, 0.03, 2);
+    CurrentAccount current("Jane Doe", 3000.0, 50.0);
+
+    Account* account;
+
+    cout << "--- Savings Account Details ---\n";
+    account = &savings;
+    account->displayDetails();
+    account->calculateInterest();
+    account->displayDetails();
+
+    cout << "\n--- Current Account Details ---\n";
+    account = &current;
+    account->displayDetails();
+    account->calculateInterest();
+    account->displayDetails();
+
+    return 0;
+}
